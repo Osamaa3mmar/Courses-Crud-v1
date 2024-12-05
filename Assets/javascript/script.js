@@ -58,7 +58,7 @@ addBtn.addEventListener("click",function(){
     else{
     cardsContainer.innerHTML=courses.map((item,i)=>{
     return `
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-lg-4 col-md-6 col-sm-12 card-cont">
           <div class="card " >
             <img src="./Assets/public/cover.png" class="card-img-top img-fluid" alt="...">
             <div class="card-body">
