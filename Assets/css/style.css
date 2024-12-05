@@ -1,0 +1,30 @@
+:root{
+    --white:#e4e8e7;
+}
+
+body{
+    background-color: var(--white);
+}
+.search-bar{
+    padding: 50px 0px ;
+}
+
+.open-add-dialog{
+    width: 50px ;
+    height: 50px ;
+    font-size: 22px;
+    font-weight: 800;
+    position:fixed;
+    bottom: 40px;
+    right: 40px;
+}
+
+.course-price{
+    font-size: 25px;
+}
+
+.cap-price{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
