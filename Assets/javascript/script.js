@@ -179,7 +179,7 @@ searchBar.addEventListener("keyup",function(e){
   let searched=courses.filter((item)=>{
     return item.title.includes(sentanse);
   });
-  if(searched.length >0){
+  if(searched.length >0){//
     loadCourses(searched);
   }
   else{
