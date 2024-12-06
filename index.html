@@ -19,7 +19,7 @@
       <div class="search-bar-inner">
         <div class="input-group mb-3">
           <span class="input-group-text bg-dark" id="basic-addon1"><label for="search"><i class="fa-solid fa-magnifying-glass text-white"></i></label></span>
-          <input type="text" class="form-control" id="search" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+          <input type="text" class="form-control search-bar-input" id="search" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
         </div>
       </div>
     </div>
@@ -62,7 +62,8 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger delete-all-btn">DELETE ALL</button>
-          <button type="button" class="btn btn-secondary clear-btn">CLEAR </button>
+          <button type="button" class="btn btn-secondary edit-form-btn">EDIT </button>
+          <button type="button" class="btn btn-secondary clear-btn" onclick="clearInputs()">CLEAR </button>
           <button type="button" class="btn btn-primary add-btn">ADD</button>
         </div>
       </div>
@@ -85,8 +86,7 @@
               <div class="course-price mb-2 fw-semibold ">30.00 <span class="text-success">$</span></div>
               <div class="course-capacity mb-2 text-secondary">50 <i class="fa-solid fa-user"></i></div>
             </div>
-              
-              <a href="#" class="btn btn-primary">Edit</a>
+              <button type="button" class="btn  btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Edit</button>
               <a href="#" class="btn btn-danger" >Delete</a>
             </div>
           </div>
