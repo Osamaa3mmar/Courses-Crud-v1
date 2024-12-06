@@ -9,6 +9,8 @@ const deleteAllBtn=document.querySelector(".delete-all-btn");
 const editFormBtn=document.querySelector(".edit-form-btn");
 const openAddDialog=document.querySelector(".open-add-dialog");
 const searchBar=document.querySelector(".search-bar-input");
+const inputs=Array.from(document.querySelectorAll(".inputs"));
+console.log(inputs);
 let enableImage=false;
 let courses=[];
 let currentCourse=-1;
@@ -19,10 +21,20 @@ let localStorageInfoLoad=()=>{
     
 }
 
+
+
+
+inputs.forEach(function(input){
+  input.addEventListener("keyup",()=>{
+    validateInputs(courseTitleInput.value,courseCapacityInput.value,courseDescriptionInput.value,coursePriceInput.value);
+  })
+})
+
 openAddDialog.onclick=()=>{
   editFormBtn.disabled=true;
-  addBtn.disabled=false;
+  addBtn.disabled=true;
   clearInputs();
+  clearValidate();
 }
 
 addBtn.addEventListener("click",function(){
@@ -50,7 +62,7 @@ addBtn.addEventListener("click",function(){
         text: "",
         icon: "success"
       });
-
+      clearValidate();
 
 
 });
@@ -60,6 +72,7 @@ function clearInputs(){
   coursePriceInput.value="";
   courseTagInput.value="";
   courseDescriptionInput.value="";
+  clearValidate();
 }
 
  function loadCourses(items=courses){
@@ -157,6 +170,7 @@ Swal.fire({
   text: "",
   icon: "success"
 });
+clearValidate();
 }
 
 function editBtn(index){
@@ -174,10 +188,10 @@ function editBtn(index){
 
 
 searchBar.addEventListener("keyup",function(e){
-  let sentanse=e.target.value;
+  let sentanse=e.target.value.toLowerCase();
   console.log(e.target.value);
   let searched=courses.filter((item)=>{
-    return item.title.includes(sentanse);
+    return item.title.toLowerCase().includes(sentanse);
   });
   if(sentanse ==""){
     loadCourses();
@@ -190,6 +204,74 @@ searchBar.addEventListener("keyup",function(e){
   }
 })
 
+function validateInputs(courseName, capacity, description, price) {
+  const courseNameRegex = /^[A-Z][a-z]{0,14}-\d+$/;
+  const descriptionRegex = /^(\b\w+\b[\s]*){1,300}$/;
+  const priceRegex = /^(?:[1-9][0-9]{0,3}|10000)$/;
+  const isValidCapacity = (value) => value >= 10 && value <= 100;
+  let result=true;
+  addBtn.disabled=true;
+  if (!courseNameRegex.test(courseName)) {
+      courseTitleInput.classList.add("is-invalid");
+      result=false;
+  }
+  else{
+    courseTitleInput.classList.remove("is-invalid");
+  courseTitleInput.classList.add("is-valid");
+  }
+  if (!isValidCapacity(capacity)) {
+    courseCapacityInput.classList.add("is-invalid");
+
+      result=false;
+  }
+  else{
+    courseCapacityInput.classList.remove("is-invalid");
+
+  courseCapacityInput.classList.add("is-valid");
+  }
+  if (!descriptionRegex.test(description)) {
+    courseDescriptionInput.classList.add("is-invalid");
+
+      result=false;
+  }
+  else{
+  courseDescriptionInput.classList.add("is-valid");
+  courseDescriptionInput.classList.remove("is-invalid");
+
+  }
+  if (!priceRegex.test(price)) {
+    coursePriceInput.classList.add("is-invalid");
+      result=false;
+  }
+  else{
+    coursePriceInput.classList.add("is-valid");
+    coursePriceInput.classList.remove("is-invalid");
+
+  }
+  if(result){
+  addBtn.disabled=false;
+  return true;
+  }
+  else{
+    return false;
+  }
+}
+
+
+
+function clearValidate(){
+  coursePriceInput.classList.remove("is-valid");
+  coursePriceInput.classList.remove("is-invalid");
+
+  courseTitleInput.classList.remove("is-invalid");
+  courseTitleInput.classList.remove("is-valid");
+  courseCapacityInput.classList.remove("is-invalid");
+
+  courseCapacityInput.classList.remove("is-valid");
+  courseDescriptionInput.classList.remove("is-valid");
+  courseDescriptionInput.classList.remove("is-invalid");
+
+}
 
 localStorageInfoLoad();
 loadCourses();
