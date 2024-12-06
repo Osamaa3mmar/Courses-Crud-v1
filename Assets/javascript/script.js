@@ -182,7 +182,7 @@ searchBar.addEventListener("keyup",function(e){
   if(sentanse ==""){
     loadCourses();
   }
-  else if(searched.length >0){//
+  else if(searched.length > 0){//
     loadCourses(searched);
   }
   else{
